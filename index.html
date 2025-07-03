@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>love by wave to earth 💌</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(135deg, #a7c7e7, #ffe0f0);
+      color: #333;
+      text-align: center;
+      overflow: hidden;
+    }
+
+    .main, .message-card {
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      padding: 20px;
+    }
+
+    .main {
+      background: linear-gradient(135deg, #a7c7e7, #ffe0f0);
+    }
+
+    h1 {
+      font-size: 2.4rem;
+      text-shadow: 0 0 10px #87cefa;
+      margin-bottom: 15px;
+    }
+
+    .cover-img {
+      width: 250px;
+      border-radius: 15px;
+      box-shadow: 0 0 25px #87cefa;
+      margin-bottom: 20px;
+    }
+
+    textarea {
+      width: 80%;
+      max-width: 400px;
+      height: 100px;
+      border-radius: 10px;
+      padding: 10px;
+      font-size: 16px;
+      border: none;
+      margin-top: 15px;
+      resize: none;
+      background: #f9f9f9;
+    }
+
+    .send-btn {
+      padding: 14px 30px;
+      font-size: 16px;
+      background-color: #fff;
+      color: #4aa6ff;
+      border: none;
+      border-radius: 50px;
+      cursor: pointer;
+      box-shadow: 0 0 15px #4aa6ff;
+      transition: 0.3s ease;
+      margin-top: 10px;
+    }
+
+    .send-btn:hover {
+      background-color: #4aa6ff;
+      color: white;
+      box-shadow: 0 0 25px #2196f3;
+    }
+
+    /* Hearts */
+    .heart {
+      width: 20px;
+      height: 20px;
+      background: pink;
+      position: absolute;
+      bottom: -20px;
+      border-radius: 50%;
+      animation: floatHearts 10s infinite ease-in;
+      opacity: 0.7;
+      z-index: 0;
+    }
+
+    .heart::after, .heart::before {
+      content: '';
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      background: pink;
+      border-radius: 50%;
+    }
+
+    .heart::before {
+      top: -10px;
+      left: 0;
+    }
+
+    .heart::after {
+      top: 0;
+      left: -10px;
+    }
+
+    @keyframes floatHearts {
+      0% {
+        transform: translateY(0) scale(1);
+        opacity: 0.8;
+      }
+      100% {
+        transform: translateY(-100vh) scale(1.4);
+        opacity: 0;
+      }
+    }
+
+    /* Message card */
+    .message-card {
+      display: none;
+      background: url('https://i.pinimg.com/736x/73/da/9f/73da9ff79fd9fa19603d15163f65ebbf.jpg') center/cover no-repeat;
+      color: white;
+      text-shadow: 0 0 5px #000;
+    }
+
+    .message-box {
+      background: rgba(0, 0, 0, 0.4);
+      padding: 30px 20px;
+      border-radius: 15px;
+      max-width: 90%;
+      width: 350px;
+      backdrop-filter: blur(8px);
+      box-shadow: 0 0 25px rgba(255, 255, 255, 0.2);
+    }
+
+    .message-box h2 {
+      font-size: 20px;
+      margin-bottom: 15px;
+    }
+
+    .message-text {
+      font-size: 18px;
+      white-space: pre-wrap;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- MAIN PAGE -->
+  <div class="main" id="mainPage">
+    <h1>hi </h1>
+    <img class="cover-img" src="https://i.pinimg.com/736x/45/c7/c1/45c7c1d9577143a7d3e5417da1b6c853.jpg" alt="wave to earth cover">
+
+    <!-- YouTube embed -->
+    <iframe 
+      width="0" 
+      height="0" 
+      src="https://www.youtube.com/embed/a1DhDp9tNtA?autoplay=1&loop=1&playlist=a1DhDp9tNtA" 
+      frameborder="0" 
+      allow="autoplay" 
+      allowfullscreen>
+    </iframe>
+
+    <textarea id="loveNote" placeholder="write your message here..."></textarea><br>
+    <button class="send-btn" onclick="sendLove()">Send it 💌</button>
+  </div>
+
+  <!-- GENERATED MESSAGE CARD -->
+  <div class="message-card" id="cardPage">
+    <div class="message-box">
+      <h2>💌 your last soft message:</h2>
+      <div class="message-text" id="finalMsg"></div>
+    </div>
+  </div>
+
+  <!-- Hearts floating -->
+  <script>
+    function createHeart() {
+      const heart = document.createElement("div");
+      heart.className = "heart";
+      heart.style.left = Math.random() * 100 + "vw";
+      heart.style.animationDuration = (5 + Math.random() * 5) + "s";
+      document.body.appendChild(heart);
+      setTimeout(() => heart.remove(), 10000);
+    }
+
+    setInterval(createHeart, 300);
+
+    function sendLove() {
+      const msg = document.getElementById("loveNote").value.trim();
+      const card = document.getElementById("cardPage");
+      const main = document.getElementById("mainPage");
+
+      if (msg) {
+        document.getElementById("finalMsg").textContent = msg;
+        card.style.display = "flex";
+        main.style.display = "none";
+      } else {
+        alert("you forgot to write your heart out 😭");
+      }
+    }
+  </script>
+</body>
+</html>
